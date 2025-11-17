@@ -1,0 +1,7 @@
+package com.petreach.appointmentscheduler.service;
+
+public interface ScheduledTasksService {
+    void updateAllAppointmentsStatuses();
+
+    void issueInvoicesForCurrentMonth();
+}

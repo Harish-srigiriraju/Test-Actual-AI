@@ -1,0 +1,25 @@
+package com.petreach.appointmentscheduler.entity.user.customer;
+
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+
+import com.petreach.appointmentscheduler.entity.user.Role;
+import com.petreach.appointmentscheduler.model.UserForm;
+
+import java.util.Collection;
+
+@Entity
+@Table(name = "retail_customers")
+@PrimaryKeyJoinColumn(name = "id_customer")
+public class RetailCustomer extends Customer {
+
+    public RetailCustomer() {
+    }
+
+    public RetailCustomer(UserForm userFormDTO, String encryptedPassword, Collection<Role> roles) {
+        super(userFormDTO, encryptedPassword, roles);
+    }
+
+
+}
