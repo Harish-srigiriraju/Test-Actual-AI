@@ -1,0 +1,10 @@
+---
+globs: ["**/*Application.java"]
+alwaysApply: false
+---
+
+# Spring Boot Framework - Enable Auto-Configuration
+
+## Policies
+
+1. Use @SpringBootApplication annotation on the main application class to enable Spring Boot auto-configuration
