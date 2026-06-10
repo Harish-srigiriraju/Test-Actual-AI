@@ -1,0 +1,30 @@
+# Enforce Input Validation Using Dedicated Form Objects with Validation Annotations: Controllers Endpoints Validate
+
+These rules are ALWAYS ACTIVE for all user input handling in web controllers, API endpoints, and form processing components that accept external input.
+
+### Rules
+
+- **R-VALIDATE-001** MUST: Controllers and API endpoints MUST validate form objects using @Valid or @Validated annotations before processing business logic.
+
+### Verify
+
+```bash
+# Count @Valid and @Validated annotations in controller files
+grep -r '@Valid\|@Validated' --include='*Controller.java' | wc -l
+
+# Find form objects lacking JSR-303 validation annotations
+find . -name '*Form.java' -o -name '*Request.java' | xargs grep -L '@NotNull\|@NotEmpty\|@Size\|@Pattern' | wc -l
+
+# Detect controller methods with @RequestBody/@ModelAttribute but missing @Valid/@Validated
+grep -r 'public.*(@RequestBody\|@ModelAttribute)' --include='*Controller.java' | grep -v '@Valid' | grep -v '@Validated'
+```
+
+**Accept when:**
+- All controller methods accepting user input have @Valid or @Validated annotations on form object parameters
+- All form objects (*Form.java, *Request.java) contain at least one JSR-303 validation annotation
+- No controller methods directly bind request parameters to domain entity classes
+- Static analysis tools report zero violations of validation annotation requirements
+
+<enforcement>
+Claude Code MUST NOT skip or defer verification. All controller endpoints accepting external input MUST be validated using dedicated form objects with JSR-303 annotations. Violations block CI pipeline and require security team approval for exceptions.
+</enforcement>
